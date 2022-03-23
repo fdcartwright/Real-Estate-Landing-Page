@@ -103,11 +103,16 @@ function initAutocomplete() {
             componentRestrictions: {'country': ['USA']},
             fields: ['formatted_address']
         });
+        // let result = Autocomplete.getPlace();
+        //     autocomplete.addListener('place_changed', addressValidation);
+        //     console.log(result)
+
 }
 
 // Address validation 
 
 function addressValidation() {
+    console.log(result)
     const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
     if (addressVal === true) {
         streetAddress.classList.remove('invalid');
