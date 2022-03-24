@@ -131,7 +131,7 @@ function fillInAddress() {
     const lat = place.geometry.viewport.zb.h;
     const lon = place.geometry.viewport.Ua.h;
     // *** API Key Input ***
-    const API_KEY = 'd41ac7bcca7a0eeb8f9ea206af7a23d9';
+    const API_KEY = '';
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
         .then(response => response.json())
         .then(data => {
@@ -145,22 +145,22 @@ function fillInAddress() {
             case "street_number": {
                 address1 = `${component.long_name} ${address1}`;
                 break;
-            }
+            };
 
             case "route": {
                 address1 += component.short_name;
                 break;
-            }
+            };
 
             case "postal_code": {
                 postcode = `${component.long_name}${postcode}`;
                 break;
-            }
+            };
 
             case "postal_code_suffix": {
                 postcode = `${postcode}-${component.long_name}`;
                 break;
-            }
+            };
             case "locality":
                 document.getElementById('cityselect').value = component.long_name;
                 localStorage.setItem('city', cityEl.value);
@@ -168,18 +168,17 @@ function fillInAddress() {
             case "administrative_area_level_1": {
                 document.getElementById('stateselect').value = component.short_name;
                 break;
-            }
-        }
+            };
+        };
 
         address1Field.value = address1;
         postalField.value = postcode;
 
         address2Field.focus();
         addressValidation();
-    }
+    };
 
     //Address validation 
-
     function addressValidation() {
         const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
         if (addressVal) {
@@ -198,7 +197,6 @@ function fillInAddress() {
     };
 };
 
-
 function addressValidationFirst() {
     const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
     if (!addressVal) {
@@ -215,9 +213,10 @@ function addressValidationFirst() {
 };
 
 streetAddress.addEventListener('change', addressValidationFirst);
-submitButton.addEventListener('click', testForm);
+submitButton.addEventListener('click', clearForm);
 
-function testForm(e) {
+//form clear and add new text
+function clearForm(e) {
     e.preventDefault();
     if (validated > 5) {
         document.getElementById('submit-error').hidden = true;
@@ -241,16 +240,9 @@ function testForm(e) {
         document.getElementById('new-form-text').removeAttribute('hidden');
         document.getElementById('new-form-text').innerHTML = `Thanks, ${dataName}!<br><br>
         Your Real Estate Team is working on a detailed home valuation and we will have this to you shorty.<br><br>
-        It looks like it's ${dataWeather} in ${dataCity} right now with changes of increased home values in the forcast!`
-
+        It looks like it's ${dataWeather} in ${dataCity} right now with a chance of increased home values in the forcast!`
     } else {
         console.log(validated);
         document.getElementById('submit-error').removeAttribute('hidden');
     };
-
-}
-
-//Google autocomplete temp https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform 
-
-//Email delivery option
-//https://www.mailslurp.com/guides/send-form-to-email/ 
+};
