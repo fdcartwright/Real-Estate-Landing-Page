@@ -1,4 +1,6 @@
 
+//***Graded features have these stars***
+
 const streetAddress = document.getElementById('streetaddress');
 const stateEl = document.getElementById('stateselect');
 const cityEl = document.getElementById('cityselect');
@@ -13,7 +15,7 @@ const googleTag = document.getElementById('google-tag');
 const formText = document.getElementById('form-text');
 let validated = 0;
 
-// Banner in
+// ***One timing function - Red "Talk to a Realtor" Banner***
 function bannerInOut() {
     setTimeout(() => {
         document.getElementById('banner').innerHTML = 'Talk To A Realtor About Our Special Pricing Today!';
@@ -22,15 +24,15 @@ function bannerInOut() {
 
 bannerInOut();
 
-//Validate first name
+//***Form validatation - first name***
 function fNameValidation() {
     const fName = /^[A-Za-z\s]+$/.test(firstName.value);
     if (fName) {
         firstName.classList.remove('invalid');
         firstName.classList.add('valid');
+        //***Sets local storage first name***
         localStorage.setItem('first-name', firstName.value)
         validated++;
-        console.log('fname', validated)
     } else if (!fName) {
         firstName.classList.remove('valid');
         firstName.classList.add('invalid');
@@ -40,7 +42,7 @@ function fNameValidation() {
 
 firstName.addEventListener('change', fNameValidation);
 
-// Validate last name
+//***Form validatation - last name*** 
 const lastName = document.getElementById("lastname");
 
 function lNameValidation() {
@@ -49,7 +51,6 @@ function lNameValidation() {
         lastName.classList.remove('invalid');
         lastName.classList.add('valid');
         validated++;
-        console.log('lname', validated)
     } else if (!lName) {
         lastName.classList.remove('valid');
         lastName.classList.add('invalid');
@@ -59,7 +60,7 @@ function lNameValidation() {
 
 lastName.addEventListener('change', lNameValidation);
 
-//Validate email
+//***Form validatation - e-mail*** 
 const eMail = document.getElementById("email");
 
 function EmailValidation() {
@@ -68,7 +69,6 @@ function EmailValidation() {
         eMail.classList.remove('invalid');
         eMail.classList.add('valid');
         validated++;
-        console.log('email', validated)
     } else if (!eMailVal) {
         eMail.classList.remove('valid');
         eMail.classList.add('invalid');
@@ -78,7 +78,7 @@ function EmailValidation() {
 
 eMail.addEventListener('change', EmailValidation);
 
-//Validate phone number
+//***Form validatation - phone number*** 
 const phoneNumber = document.getElementById("phonenumber");
 
 function phoneValidation() {
@@ -87,7 +87,6 @@ function phoneValidation() {
         phoneNumber.classList.remove('invalid');
         phoneNumber.classList.add('valid');
         validated++;
-        console.log('phone', validated)
     } else if (!phoneVal) {
         phoneNumber.classList.remove('valid');
         phoneNumber.classList.add('invalid');
@@ -96,8 +95,7 @@ function phoneValidation() {
 };
 phoneNumber.addEventListener('change', phoneValidation);
 
-//Address google places auto complete
-
+//Address Google Places autocomplete API (not a fetch API/not graded)
 let autocomplete;
 let address1Field;
 let address2Field;
@@ -127,14 +125,15 @@ function fillInAddress() {
     let address1 = "";
     let postcode = "";
 
-    // *** Weather API Fetch ***
+    // *** 3rd party weather API fetch - sends weather data to local storage and from local storage to the text response once the form is completed and submitted (final function clearForm())***
     const lat = place.geometry.viewport.zb.h;
     const lon = place.geometry.viewport.Ua.h;
-    // *** API Key Input ***
-    const API_KEY = '';
+    // *** API Key Input [ALSO PLACE GOOGLE API KEY IN HTML DOC (these work together for longitude and latitude)]***
+    const API_KEY = 'WEATHER_API_KEY_HERE';
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
         .then(response => response.json())
         .then(data => {
+            //***Sets local storage weather description***
             localStorage.setItem('weather', data.weather[0].description)
         });
 
@@ -163,6 +162,7 @@ function fillInAddress() {
             };
             case "locality":
                 document.getElementById('cityselect').value = component.long_name;
+                //***Sets local storage city***
                 localStorage.setItem('city', cityEl.value);
                 break;
             case "administrative_area_level_1": {
@@ -178,7 +178,7 @@ function fillInAddress() {
         addressValidation();
     };
 
-    //Address validation 
+    //***Form validatation - address for the Google autocomplete*** 
     function addressValidation() {
         const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
         if (addressVal) {
@@ -191,12 +191,12 @@ function fillInAddress() {
             cityEl.classList.add('valid');
             zipEl.classList.add('valid');
             validated++;
-            console.log('address', validated)
         } else {
         };
     };
 };
 
+//***Form validatation - address prior to Google autocomplete*** 
 function addressValidationFirst() {
     const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
     if (!addressVal) {
@@ -215,15 +215,14 @@ function addressValidationFirst() {
 streetAddress.addEventListener('change', addressValidationFirst);
 submitButton.addEventListener('click', clearForm);
 
-//form clear and add new text
+//on submit button, form clear and add new text.
 function clearForm(e) {
     e.preventDefault();
-    if (validated > 5) {
+    if (validated >= 11) {
         document.getElementById('submit-error').hidden = true;
+        //***Gets local storage weather, city, & first name***
         const dataWeather = localStorage.getItem('weather');
-        console.log(localStorage.getItem('weather'))
         const dataCity = localStorage.getItem('city');
-        console.log(localStorage.getItem('city'))
         const dataName = localStorage.getItem('first-name');
         formText.hidden = true;
         firstName.hidden = true;
@@ -239,10 +238,10 @@ function clearForm(e) {
         googleTag.hidden = true;
         document.getElementById('new-form-text').removeAttribute('hidden');
         document.getElementById('new-form-text').innerHTML = `Thanks, ${dataName}!<br><br>
-        Your Real Estate Team is working on a detailed home valuation and we will have this to you shorty.<br><br>
-        It looks like it's ${dataWeather} in ${dataCity} right now with a chance of increased home values in the forcast!`
+        It looks like ${dataWeather} in ${dataCity} right now with a chance of increased home values in the forecast!<br><br>
+        Keep any eye out for an e-mail with your detailed home valuation.`
+
     } else {
-        console.log(validated);
         document.getElementById('submit-error').removeAttribute('hidden');
     };
 };

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Real Estate Landing Page</title>
     <link rel="stylesheet" href="style.css">
@@ -10,12 +11,15 @@
     </div>
 </header>
 <div id="banner"></div>
+
 <body>
     <div id="bodycontainer">
         <div id="bodycolumns">
             <div><img id="FS-IMG" src="Pics/FSIMG.png"></div>
-            <p id="main-text">Save money and time when you work with professions at Your Real Estate. Our dedicated real estate
-                staff is available seven days a week to provide the best service in the industry.<br> Give us a call today!
+            <p id="main-text">Save money and time when you work with professions at Your Real Estate. Our dedicated real
+                estate
+                staff is available seven days a week to provide the best service in the industry.<br> Give us a call
+                today!
             </p>
         </div>
         <div id="bodycolumns">
@@ -50,19 +54,20 @@
                     <div class="container-row">
                         <div class="container-column">
                             <label for="streetaddress"></label><br>
-                            <input placeholder="Street Address"type="text" id="streetaddress" name="streetaddress">
+                            <input placeholder="Street Address" type="text" id="streetaddress" name="streetaddress">
                         </div>
                     </div>
                     <div class="container-row">
                         <div class="container-column">
                             <label for="streetaddress2"></label><br>
-                            <input placeholder="Unit, Apt, Suite # (optional)"type="text" id="streetaddress2" name="streetaddress2">
+                            <input placeholder="Unit, Apt, Suite # (optional)" type="text" id="streetaddress2"
+                                name="streetaddress2">
                         </div>
                     </div>
                     <div class="container-row">
                         <div class="container-column">
                             <label for="stateselect"></label>
-                            <input placeholder="State"type="text" id="stateselect" name="stateselect">
+                            <input placeholder="State" type="text" id="stateselect" name="stateselect">
                         </div>
                         <div class="container-column">
                             <label for="cityselect"></label>
@@ -86,10 +91,13 @@
         </div>
     </div>
     <script src="RealEstateLandingPage.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=_____&libraries=places&callback=initAutocomplete">
-    </script>
+        <!-- ***PLACE_GOOGLE_API_KEY_HERE (works with weather API)*** -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY_HERE&libraries=places&callback=initAutocomplete">
+        </script>
 </body>
 <footer>
     <a href="README.md">License/Credits</a>
 </footer>
+
 </html>
