@@ -1,8 +1,4 @@
-Real Estate Landing Page - UW Coding Class Project - not for commercial use
-
-Google autocomplete temp: https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform 
-
-Email delivery option: https://www.mailslurp.com/guides/send-form-to-email/ 
+Real Estate Landing Page - UW Coding Final Class Project - not for commercial use
 
 Licenses/credits:
 
