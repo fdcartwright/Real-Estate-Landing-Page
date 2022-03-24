@@ -1,99 +1,102 @@
 
-// Your project must include 4 of the 6 following features (but may include more):
-// One or more Classes (must use static methods and/or prototype methods)
-// Sets, updates, or changes local storage
-
-
-// API fetch requeest
-
-
-//  Jasmine unit test
-
+const streetAddress = document.getElementById('streetaddress');
+const stateEl = document.getElementById('stateselect');
+const cityEl = document.getElementById('cityselect');
+const zipEl = document.getElementById('zipselect');
+const submitButton = document.getElementById('submitbutton');
+const formEl = document.getElementsByName('form');
+const firstName = document.getElementById("firstname");
+const emailEl = document.getElementById('email');
+const phoneNum = document.getElementById('phonenumber');
+const address2 = document.getElementById('streetaddress2');
+const googleTag = document.getElementById('google-tag');
+const formText = document.getElementById('form-text');
+let validated = 0;
 
 // Banner in
 function bannerInOut() {
     setTimeout(() => {
         document.getElementById('banner').innerHTML = 'Talk To A Realtor About Our Special Pricing Today!';
     }, 8000);
-}
+};
+
 bannerInOut();
 
 //Validate first name
-
-const formEl = document.getElementsByName('form');
-const firstName = document.getElementById("firstname");
-
 function fNameValidation() {
     const fName = /^[A-Za-z\s]+$/.test(firstName.value);
-    if (fName === true) {
+    if (fName) {
         firstName.classList.remove('invalid');
         firstName.classList.add('valid');
-    } else if (fName === false) {
+        localStorage.setItem('first-name', firstName.value)
+        validated++;
+        console.log('fname', validated)
+    } else if (!fName) {
         firstName.classList.remove('valid');
         firstName.classList.add('invalid');
     } else {
-    }
-}
+    };
+};
 
 firstName.addEventListener('change', fNameValidation);
 
 // Validate last name
-
 const lastName = document.getElementById("lastname");
 
 function lNameValidation() {
     const lName = /^[A-Za-z\s]+$/.test(lastName.value);
-    if (lName === true) {
+    if (lName) {
         lastName.classList.remove('invalid');
         lastName.classList.add('valid');
-    } else if (lName === false) {
+        validated++;
+        console.log('lname', validated)
+    } else if (!lName) {
         lastName.classList.remove('valid');
         lastName.classList.add('invalid');
     } else {
-    }
-}
+    };
+};
+
 lastName.addEventListener('change', lNameValidation);
 
 //Validate email
-
 const eMail = document.getElementById("email");
 
 function EmailValidation() {
     const eMailVal = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(eMail.value);
-    if (eMailVal === true) {
+    if (eMailVal) {
         eMail.classList.remove('invalid');
         eMail.classList.add('valid');
-    } else if (eMailVal === false) {
+        validated++;
+        console.log('email', validated)
+    } else if (!eMailVal) {
         eMail.classList.remove('valid');
         eMail.classList.add('invalid');
     } else {
-    }
-}
+    };
+};
+
 eMail.addEventListener('change', EmailValidation);
 
 //Validate phone number
-
 const phoneNumber = document.getElementById("phonenumber");
 
 function phoneValidation() {
     const phoneVal = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/.test(phoneNumber.value);
-    if (phoneVal === true) {
+    if (phoneVal) {
         phoneNumber.classList.remove('invalid');
         phoneNumber.classList.add('valid');
-    } else if (phoneVal === false) {
+        validated++;
+        console.log('phone', validated)
+    } else if (!phoneVal) {
         phoneNumber.classList.remove('valid');
         phoneNumber.classList.add('invalid');
     } else {
-    }
-}
+    };
+};
 phoneNumber.addEventListener('change', phoneValidation);
 
 //Address google places auto complete
-
-const streetAddress = document.getElementById('streetaddress');
-const stateEl = document.getElementById('stateselect');
-const cityEl = document.getElementById('cityselect');
-const zipEl = document.getElementById('zipselect');
 
 let autocomplete;
 let address1Field;
@@ -124,6 +127,17 @@ function fillInAddress() {
     let address1 = "";
     let postcode = "";
 
+    // *** Weather API Fetch ***
+    const lat = place.geometry.viewport.zb.h;
+    const lon = place.geometry.viewport.Ua.h;
+    // *** API Key Input ***
+    const API_KEY = 'd41ac7bcca7a0eeb8f9ea206af7a23d9';
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('weather', data.weather[0].description)
+        });
+
     for (const component of place.address_components) {
         const componentType = component.types[0];
 
@@ -149,6 +163,7 @@ function fillInAddress() {
             }
             case "locality":
                 document.getElementById('cityselect').value = component.long_name;
+                localStorage.setItem('city', cityEl.value);
                 break;
             case "administrative_area_level_1": {
                 document.getElementById('stateselect').value = component.short_name;
@@ -163,11 +178,11 @@ function fillInAddress() {
         addressValidation();
     }
 
-//Address validation 
+    //Address validation 
 
     function addressValidation() {
         const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
-        if (addressVal === true) {
+        if (addressVal) {
             streetAddress.classList.remove('invalid');
             stateEl.classList.remove('invalid');
             cityEl.classList.remove('invalid');
@@ -176,33 +191,17 @@ function fillInAddress() {
             stateEl.classList.add('valid');
             cityEl.classList.add('valid');
             zipEl.classList.add('valid');
-        } else if (addressVal === false) {
-            streetAddress.classList.remove('valid');
-            stateEl.classList.remove('valid');
-            cityEl.classList.remove('valid');
-            zipEl.classList.remove('valid');
-            streetAddress.classList.add('invalid');
-            stateEl.classList.add('invalid');
-            cityEl.classList.add('invalid');
-            zipEl.classList.add('invalid');
+            validated++;
+            console.log('address', validated)
         } else {
-        }
+        };
     };
 };
 
 
 function addressValidationFirst() {
     const addressVal = /^\d{1,}\s((\D+\s+)|(\d+\D+\s+))/.test(streetAddress.value);
-    if (addressVal === true) {
-        streetAddress.classList.remove('invalid');
-        stateEl.classList.remove('invalid');
-        cityEl.classList.remove('invalid');
-        zipEl.classList.remove('invalid');
-        streetAddress.classList.add('valid');
-        stateEl.classList.add('valid');
-        cityEl.classList.add('valid');
-        zipEl.classList.add('valid');
-    } else if (addressVal === false) {
+    if (!addressVal) {
         streetAddress.classList.remove('valid');
         stateEl.classList.remove('valid');
         cityEl.classList.remove('valid');
@@ -212,10 +211,46 @@ function addressValidationFirst() {
         cityEl.classList.add('invalid');
         zipEl.classList.add('invalid');
     } else {
-    }
+    };
 };
 
 streetAddress.addEventListener('change', addressValidationFirst);
+submitButton.addEventListener('click', testForm);
+
+function testForm(e) {
+    e.preventDefault();
+    if (validated > 5) {
+        document.getElementById('submit-error').hidden = true;
+        const dataWeather = localStorage.getItem('weather');
+        console.log(localStorage.getItem('weather'))
+        const dataCity = localStorage.getItem('city');
+        console.log(localStorage.getItem('city'))
+        const dataName = localStorage.getItem('first-name');
+        formText.hidden = true;
+        firstName.hidden = true;
+        lastName.hidden = true;
+        emailEl.hidden = true;
+        phoneNum.hidden = true;
+        streetAddress.hidden = true;
+        address2.hidden = true;
+        stateEl.hidden = true;
+        cityEl.hidden = true;
+        zipEl.hidden = true;
+        submitButton.hidden = true;
+        googleTag.hidden = true;
+        document.getElementById('new-form-text').removeAttribute('hidden');
+        document.getElementById('new-form-text').innerHTML = `Thanks, ${dataName}!<br><br>
+        Your Real Estate Team is working on a detailed home valuation and we will have this to you shorty.<br><br>
+        It looks like it's ${dataWeather} in ${dataCity} right now with changes of increased home values in the forcast!`
+
+    } else {
+        console.log(validated);
+        document.getElementById('submit-error').removeAttribute('hidden');
+    };
+
+}
 
 //Google autocomplete temp https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform 
 
+//Email delivery option
+//https://www.mailslurp.com/guides/send-form-to-email/ 

@@ -1,21 +1,14 @@
 
-
-header {
-    padding: 1%;
-}
-
 footer {
     padding: 2%;
 
 }
 #headerlogo {
     position:relative;
-    padding: 1%;
-    max-width: 90px;
+    max-width: 230px;
     height: auto;
-    border-color: gray;
-    border-style: dashed;
 }
+
 #banner {
     text-align: center;
     color: rgba(255, 255, 255, 0.938);
@@ -41,9 +34,6 @@ footer {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-}
-
 #FS-IMG {
     position: relative;
     max-width: 20%;
@@ -53,12 +43,24 @@ body {
     margin-right: auto;
 }
 
+#new-form-text {
+    text-align: center;
+    font-size: 140%;
+}
+
 #google-tag {
     display: block;
     margin-left: 80%;
     margin-right: auto;
     max-width: 190%;
     height: auto;
+}
+
+#submit-error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+
 }
 
 #main-text {
