@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Real Estate Landing Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <header>
-    <p>LOGO HERE</p>
+    <div id="logo-container"><img id="headerlogo" src="Pics/LOGO.png"></div>
 </header>
-<div hidden id="banner">Talk To A Realtor About Our Special Pricing Today!</div>
+<div id="banner"></div>
 <body>
     <div id="bodycontainer">
         <div id="bodycolumns">
-            <h3>Real Estate Photo Here</h3>
-            <p>Save money and time when you work with professions at 'INSERT COMPANY NAME'. Our dedicated real estate
+            <div><img id="FS-IMG" src="Pics/FSIMG.png"></div>
+            <p id="main-text">Save money and time when you work with professions at 'INSERT COMPANY NAME'. Our dedicated real estate
                 staff is available seven days a week to provide the best service in the industry. Give us a call today!
             </p>
         </div>
@@ -21,103 +20,58 @@
             <form>
                 <div id="formcontainer">
                     <div class="container-row">
-                        <h3>Find Out What Your Home Is Worth</h3>
+                        <h3>Get Your Home Value!</h3>
                     </div>
                     <div class="container-row">
                         <div class="container-column">
-                            <label for="firstname">First Name</label><br>
-                            <input type="text" id="firstname" name="firstname">
+                            <label for="firstname"></label><br>
+                            <input placeholder="First Name" type="text" id="firstname" name="firstname">
                         </div>
                         <div class="container-column">
-                            <label for="lastname">Last Name</label><br>
-                            <input type="text" id="lastname" name="lastname"><br>
-                        </div>
-                    </div>
-                    <div class="container-row">
-                        <div class="container-column">
-                            <label for="email">E-mail Address</label><br>
-                            <input type="text" id="email" name="email">
-                        </div>
-                        <div class="container-column">
-                            <label for="phonenumber">Phone Number</label><br>
-                            <input type="text" id="phonenumber" name="phonenumber">
+                            <label for="lastname"></label><br>
+                            <input placeholder="Last Name" type="text" id="lastname" name="lastname"><br>
                         </div>
                     </div>
                     <div class="container-row">
                         <div class="container-column">
-                            <label for="streetaddress">Street Address</label><br>
-                            <input placeholder="address here"type="text" id="streetaddress" name="streetaddress">
+                            <label for="email"></label><br>
+                            <input placeholder="Email Address" type="text" id="email" name="email">
+                        </div>
+                        <div class="container-column">
+                            <label for="phonenumber"></label><br>
+                            <input placeholder="Phone Number" type="text" id="phonenumber" name="phonenumber">
                         </div>
                     </div>
                     <div class="container-row">
                         <div class="container-column">
-                            <label for="stateselect">State</label>
-                            <select name="stateselect" id="stateselect">
-                                <option value="AL">AL</option>
-                                <option value="AK">AK</option>
-                                <option value="AZ">AZ</option>
-                                <option value="AR">AR</option>
-                                <option value="CA">CA</option>
-                                <option value="CO">CO</option>
-                                <option value="CT">CT</option>
-                                <option value="DE">DE</option>
-                                <option value="DC">DC</option>
-                                <option value="FL">FL</option>
-                                <option value="GA">GA</option>
-                                <option value="HI">HI</option>
-                                <option value="ID">ID</option>
-                                <option value="IL">IL</option>
-                                <option value="IN">IN</option>
-                                <option value="IA">IA</option>
-                                <option value="KS">KS</option>
-                                <option value="KY">KY</option>
-                                <option value="LA">LA</option>
-                                <option value="ME">ME</option>
-                                <option value="MD">MD</option>
-                                <option value="MA">MA</option>
-                                <option value="MI">MI</option>
-                                <option value="MN">MN</option>
-                                <option value="MS">MS</option>
-                                <option value="MO">MO</option>
-                                <option value="MT">MT</option>
-                                <option value="NE">NE</option>
-                                <option value="NV">NV</option>
-                                <option value="NH">NH</option>
-                                <option value="NJ">NJ</option>
-                                <option value="NM">NM</option>
-                                <option value="NY">NY</option>
-                                <option value="NC">NC</option>
-                                <option value="ND">ND</option>
-                                <option value="OH">OH</option>
-                                <option value="OK">OK</option>
-                                <option value="OR">OR</option>
-                                <option value="PA">PA</option>
-                                <option value="RI">RI</option>
-                                <option value="SC">SC</option>
-                                <option value="SD">SD</option>
-                                <option value="TN">TN</option>
-                                <option value="TX">TX</option>
-                                <option value="UT">UT</option>
-                                <option value="VT">VT</option>
-                                <option value="VA">VA</option>
-                                <option value="WA">WA</option>
-                                <option value="WV">WV</option>
-                                <option value="WI">WI</option>
-                                <option value="WY">WY</option>
-                            </select>
+                            <label for="streetaddress"></label><br>
+                            <input placeholder="Street Address"type="text" id="streetaddress" name="streetaddress">
+                        </div>
+                    </div>
+                    <div class="container-row">
+                        <div class="container-column">
+                            <label for="streetaddress2"></label><br>
+                            <input placeholder="Unit, Apt, Suite # (optional)"type="text" id="streetaddress2" name="streetaddress2">
+                        </div>
+                    </div>
+                    <div class="container-row">
+                        <div class="container-column">
+                            <label for="stateselect"></label>
+                            <input placeholder="State"type="text" id="stateselect" name="stateselect">
                         </div>
                         <div class="container-column">
-                            <label for="cityselect">City</label>
-                            <input type="text" id="cityselect" name="cityselect">
+                            <label for="cityselect"></label>
+                            <input placeholder="City" type="text" id="cityselect" name="cityselect">
                         </div>
                         <div class="container-column">
-                            <label for="zipselect">Zip Code</label>
-                            <input type="text" id="zipselect" name="zipselect">
+                            <label for="zipselect"></label>
+                            <input placeholder="Zip Code" type="text" id="zipselect" name="zipselect">
                         </div>
                     </div>
                     <div class="container-row">
                         <div class="container-column">
                             <input type="submit" id="submitbutton">
+                            <div id="google-tag"><img id="google-tag" src="Pics/powered_by_google_on_white.png"></div>
                         </div>
                     </div>
                 </div>
@@ -129,5 +83,7 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtfwyhqcxobojFD10ba_99f0gp-unC_oQ&libraries=places&callback=initAutocomplete">
     </script>
 </body>
-
+<footer>
+    <a href="README.md">Photo License/Credits</a>
+</footer>
 </html>
